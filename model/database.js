@@ -11,7 +11,7 @@ const con = mysql.createConnection({
   host: DB_HOST || "127.0.0.1",
   user: DB_USER || "root",
   password: DB_PASS,
-  database: DB_NAME || "facebook",
+  database: DB_NAME || "my_first_mvp",
   multipleStatements: true
 });
 
@@ -22,10 +22,11 @@ con.connect(function(err) {
   let sql = fs.readFileSync(__dirname + "/init_db.sql").toString();
   con.query(sql, function(err, result) {
     if (err) throw err;
-    console.log("Table creation `students` was successful!");
+    console.log("Table creation `animals` and `collaborators` was successful!");
 
     console.log("Closing...");
   });
 
   con.end();
 });
+//What is declare here is what we send to mySQL when we run npm migrate in order to create the database there.

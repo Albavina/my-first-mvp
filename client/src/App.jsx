@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react';
+import {Routes, Route} from "react-router-dom";
 import './App.css'
+import Animal from './components/Animal';
+import Collaborator from './components/Collaborator';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+import ErrorPage from './components/ErrorPage';
+import AnimalProfile from './components/AnimalProfile';
+import Admin from './components/Admin';
+import AdoptionForm from './components/AdoptionForm';
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header className='header-img'></header>
+      <Navbar />
+
+      <h1>RESCUE A BEST FRIEND</h1>
+        
+    <Routes>
+    <Route path="/" element ={<Animal />} >
+        <Route path=":id" element ={<AnimalProfile />} />
+  
+      </Route>
+      <Route path="/:id/adoptionForm" element={<AdoptionForm />}/>
+      <Route path="/home" element = {<Home />} />
+      <Route path="/collaborator" element ={<Collaborator />} />
+      <Route path="/admin" element ={<Admin />} />
+      <Route path="*" element ={<ErrorPage />} />
+    </Routes>
     </>
-  )
-}
+  );
+};
 
 export default App
