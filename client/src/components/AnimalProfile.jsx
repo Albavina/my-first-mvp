@@ -40,7 +40,14 @@ export default function AnimalProfile() {
             </Link>
             </div>
         </button>
-            <button type="submit" className='sponsor-button'>Sponsor</button>
+            <button type="submit" className='sponsor-button'>
+            <div>
+            <Outlet />
+            <Link to="sponsorForm">
+            Sponsor
+            </Link>
+            </div>
+        </button>
             </div>
         </div>
     )}

@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import "./AdoptionForm.css"
+import "./SponsorForm.css"
 
 let emptyForm = {firstName:"", lastName:"", email: "", phoneNumber:0, age: 0, kindOfCollaboration: ""}
 
-export default function AdoptionForm() {
+export default function SponsorForm() {
     const [animalInfo, setAnimalInfo]=useState(null);
-    const [collaborators, setCollaborators]= useState([])
+    const [collaborators, setCollaborators]=useState([]);
     const [newCollaborator, setNewCollaborator]=useState(emptyForm);
 
     const {id} = useParams(); //This is to take the id from the URL
@@ -15,56 +15,47 @@ export default function AdoptionForm() {
     const getAnimalInfo = async () => {
         try{
             const result = await fetch(`api/animals/${id}`);
-            console.log(result)
             const info = await result.json();
-            
             setAnimalInfo(info);
         }catch (error){
-           console.log(error)
+            console.log(error)
         };
     };
-
     useEffect(() => {getAnimalInfo()}, [])
 
     const addCollaborator = async () => {
-      try {
-        const response = await fetch("/api/collaborators", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newCollaborator)
-        });
-        const addedCollaborator = await response.json();
-        setCollaborators (addedCollaborator);
-        setNewCollaborator(emptyForm);  
-        }catch(err) {
-          console.log(err);
-        };
-     }
-    const handleSubmit = event => {
-      event.preventDefault();
-      addCollaborator();
-      setNewCollaborator(emptyForm);
-    };
+        try {
+          const response = await fetch("/api/collaborators", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newCollaborator)
+          });
+          const addedCollaborator = await response.json();
+          setCollaborators (addedCollaborator);
+          setNewCollaborator(emptyForm);  
+          }catch(err) {
+            console.log(err);
+          };
+       }
+      const handleSubmit = event => {
+        event.preventDefault();
+        addCollaborator();
+        setNewCollaborator(emptyForm);
+      };
+  
+      const handleChange = (event) => {
+        const {name, value} = event.target;
+        setNewCollaborator((collaboratorList) => ({...collaboratorList, [name]:value}))}
 
-    const handleChange = (event) => {
-      const {name, value} = event.target;
-      setNewCollaborator((collaboratorList) => ({...collaboratorList, [name]:value}))
-    }
-    //CONTROL THAT THE PERSON WHO WANTS TO ADOPT IS AN ADULT:
-    // const checkAge = (age) => {
-    //   if (age < 18){
-    //     return "Sorry, only adults can proceed with an adoption"
-    //   }
-    // }
 
   return (
     <>
-       <div>
-       <h2>ADOPTION</h2>
-            <h2>🎉We are very happy to know that you want to adopt 🎉</h2>
-            <h3>In order to proceed, we need you to fulfill the following form 📑</h3>
-       </div>
-        <div>
+    <h2>SPONSORSHIP</h2>
+    <h3>Maybe you do not have the space, the time or permission where you live to have a pet but you still want to help one somehow.
+    The sponsorship is the best option for you. The fee is from €5/month. Everyone can choose to sponsor one of our friends by donating €5/month or, if their finances allow it, prefer to give €10/month, €15/month or the amount they choose. 
+    If you want to go ahead, it's very simple. You just have to fill out this form:
+    </h3>
+    <div>
           {/* Show the information of the animal that is going to be adopted  */}
         {animalInfo && (
             <div className="container">
@@ -76,9 +67,8 @@ export default function AdoptionForm() {
             </div>
         )}
         </div>
-          {/* Show the form for the collaborator to introduce personal info */}
-         <div>
-         <form onSubmit={handleSubmit}>
+    <div>
+        <form onSubmit={handleSubmit}>
               <div>
                 <label>First Name</label>
                 <input
@@ -102,7 +92,6 @@ export default function AdoptionForm() {
                 type="number"
                 id="age"
                 name="age"
-                // value={checkAge(newCollaborator.age)}
                 value={newCollaborator.age}
                 onChange={handleChange} />
               </div>
@@ -135,9 +124,11 @@ export default function AdoptionForm() {
               <div>
                 <button type="submit" className="adopt-button">Send</button>
               </div>
-        </form>
-        </div>
-    <h4>As soon as we receive the information we will contact you in order to tell you what the next steps are 😉</h4>
+        </form>    
+    </div>
+
+
+    <h3>Once you have sponsored a dog, you will receive information via email about its status, its progress and its life in general. We will also send you, on its behalf, a postcard to wish you a happy Christmas, as well as photos throughout the year.🤗</h3>
     </>
   )
 }

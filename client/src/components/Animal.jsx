@@ -6,7 +6,10 @@ import './Animal.css';
 export default function Animal() {
 
   const [animals, setAnimals] = useState([]);
-
+  //const selectAnimalType = ["All", ...new Set (animals.map(animal => animal.animalType))]
+  //console.log(selectAnimalType)
+  // const [animalType, setAnimalType] = useState(selectAnimalType)
+  
 
   useEffect(() => {
     getAnimals()}, []);
@@ -15,29 +18,26 @@ export default function Animal() {
     try{
       const result = await fetch("/api/animals");
       const info = await result.json();
-      setAnimals(info);      
+      setAnimals(info);   
       }catch (error){
         console.log(error)};
     };
+    
+  // const handleFilterType = (type) => {
+  //   console.log(type)
+  // }
   
-  const handleAnimalType = () =>{
-    setAnimals(animalType.toLowerCase("dog"))
-  }
+
   
   return (
     <div className ="container">
       <h2>Friends looking for a home</h2>
-      <div className="animal-type">
-        <button onClick={handleAnimalType}>DOGS</button>
-        <button>CATS</button>
-        <button>OTHERS</button>
-      </div>
-      {/* <div className='selector'>
-        <form>
-          <input type="text">Type</input>
-          <input type="text">Age</input>
-        </form>
-      </div> */}
+      {/* <div className="animal-type">
+        {animalType.map((type) => 
+        <button key={type}
+        onClick={() => handleFilterType(type)}>{type.animalType}</button>)}
+      </div>  */}
+      
       <div className="outlet-grid">
         <Outlet />
       </div>

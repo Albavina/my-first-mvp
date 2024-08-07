@@ -4,8 +4,10 @@
   padding: 2rem;
   text-align: center;
 }
-h1{
-  
-  padding: 50px;
+
+.header-img{
+  padding: 100px;
+  margin: 50px;
   background-image: url("https://cdn.pixabay.com/photo/2024/07/16/19/32/paws-8899971_1280.png");
+  background-size: 100%;
 }
