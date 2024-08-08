@@ -12,6 +12,10 @@ import AdoptionForm from './components/AdoptionForm';
 import SponsorForm from './components/SponsorForm';
 import AdminAnimals from './components/AdminAnimals';
 import AdminCollaborators from './components/AdminCollaborators';
+import Donate from "./components/Donate";
+import Volunteer from './components/Volunteer';
+import BecomePartner from "./components/BecomePartner";
+
 
 
 function App() {
@@ -34,6 +38,9 @@ function App() {
       <Route path="/admin" element ={<Admin />} />
       <Route path="/adminAnimals" element ={<AdminAnimals />} />
       <Route path="/adminCollaborators" element ={<AdminCollaborators />} />
+      <Route path="/collaborator/donate" element={<Donate />} />
+      <Route path="collaborator/volunteer" element={<Volunteer />} />
+      <Route path="collaborator/becomePartner" element={<BecomePartner />} />
     
       <Route path="*" element ={<ErrorPage />} />
     </Routes>

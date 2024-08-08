@@ -1,3 +1,11 @@
 img{
-    width:50%;
+    width:40%;
+}
+
+.contact-container{
+    border: 2px solid green;
+    border-radius: 25px;
+    width: 50%;
+    margin: auto;
+    font-size: 20px;
 }

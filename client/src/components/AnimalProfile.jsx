@@ -23,10 +23,10 @@ export default function AnimalProfile() {
     <>
         <div>Animal Profile</div>
     {animalProfile && (
-        <div className="container">
-          <img className="animal-picture" alt="Animal Picture"
+        <div className="container" id="profile-container">
+          <img className="animal-picture" alt="Animal Picture" id="animal-picture"
             src = {animalProfile.picture}/>
-            <div className="info">
+            <div className="info" id="profile">
                 <p>My name is {animalProfile.name}</p>
                 <p>I am {animalProfile.age} years old</p>
                 <p>{animalProfile.description}</p>
