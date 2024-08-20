@@ -4,7 +4,7 @@ import "./AnimalProfile.css"
 
 export default function AnimalProfile() {
     const [animalProfile, setAnimalProfile]=useState(null);
-
+ 
     const {id} = useParams(); //This is to take the id from the URL
 
 
@@ -19,9 +19,10 @@ export default function AnimalProfile() {
     };
     
     useEffect(() => {getAnimalProfile()}, [id])
+
+  
     return (
     <>
-        <div>Animal Profile</div>
     {animalProfile && (
         <div className="container" id="profile-container">
           <img className="animal-picture" alt="Animal Picture" id="animal-picture"
@@ -31,7 +32,7 @@ export default function AnimalProfile() {
                 <p>I am {animalProfile.age} years old</p>
                 <p>{animalProfile.description}</p>
             </div>
-            <div>
+            {!animalProfile.adoptionDate && <div>
             <button type="submit" className='adopt-button'> 
             <div>
             <Outlet />
@@ -48,7 +49,7 @@ export default function AnimalProfile() {
             </Link>
             </div>
         </button>
-            </div>
+            </div>}
         </div>
     )}
     

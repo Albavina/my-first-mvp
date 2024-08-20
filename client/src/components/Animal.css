@@ -1,7 +1,7 @@
-.container{
+/* .container{
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
+} */
 .outlet-grid{
   display: grid;
   grid-template-columns: 1fr;
@@ -111,4 +111,13 @@
   background-color: #c85000;
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
+}
+
+.adopted-conditional{
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  background-color: #c2fbd7;
+  border: 1px solid greenyellow;
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
 }

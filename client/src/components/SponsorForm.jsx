@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./SponsorForm.css"
 
 let emptyForm = {firstName:"", lastName:"", email: "", phoneNumber:0, age: 0, kindOfCollaboration: ""}
@@ -9,6 +9,8 @@ export default function SponsorForm() {
     const [animalInfo, setAnimalInfo]=useState(null);
     const [collaborators, setCollaborators]=useState([]);
     const [newCollaborator, setNewCollaborator]=useState(emptyForm);
+
+    const navigate = useNavigate();
 
     const {id} = useParams(); //This is to take the id from the URL
 
@@ -46,6 +48,10 @@ export default function SponsorForm() {
       const handleChange = (event) => {
         const {name, value} = event.target;
         setNewCollaborator((collaboratorList) => ({...collaboratorList, [name]:value}))}
+      
+      const handleCancelClick=()=>{
+        navigate("/");
+      }
 
 
   return (
@@ -123,6 +129,7 @@ export default function SponsorForm() {
 
               <div>
                 <button type="submit" className="adopt-button">Send</button>
+                <button type="submit" className="cancel-button" onClick={handleCancelClick}>Cancel</button>
               </div>
         </form>    
     </div>

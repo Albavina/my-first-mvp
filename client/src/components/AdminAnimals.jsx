@@ -9,6 +9,7 @@ export default function Admin() {
     const [showForm, setShowForm] = useState(false);
     const [updatedAnimal, setUpdatedAnimal] = useState({animalType:"", name:"", age: 0, size:"", admissionDate: "", adoptionDate:"", picture: "", description: ""});
     const [updateForm, setUpdateForm] = useState (false);
+    const [formSentMessage, setFormSentMessage] = useState(false);
    
     const getValue = (value) => value || "";
    
@@ -35,7 +36,8 @@ export default function Admin() {
         });
         const addedAnimal = await response.json();
         setAnimals (addedAnimal);
-        setNewAnimal(emptyForm);  
+        setNewAnimal(emptyForm);
+        setFormSentMessage(true)  
         }catch(err) {
           console.log(err);
         };
@@ -61,6 +63,7 @@ export default function Admin() {
       });
       const updatedInfo= await result.json();
       setUpdatedAnimal(updatedInfo)
+      setFormSentMessage(true)
     }catch(error){
       console.log(error)
     }
@@ -182,6 +185,7 @@ export default function Admin() {
             onChange={e => handleChange(e)}></textarea>
         </div>
         <button type="submit" className='submit-button'>Submit</button>
+        <div className='form-sent-message'>{formSentMessage ? <h4>FORM CORRECTLY SENT!</h4> : null}</div>
     </form>
     }
     <div className='container'>
@@ -267,7 +271,11 @@ export default function Admin() {
             onChange={e => handleUpdateChange(e)}></textarea>
         </div>
         <button type="submit" className='submit-button'>Send</button>
+        <div className='form-sent-message'>{formSentMessage ? <h4>FORM CORRECTLY SENT!</h4> : null}</div>
     </form>}
+          <div>
+            
+          </div>
             <button className="delete-button" onClick={() => deleteAnimal(animal.id)}>Delete</button>
           </div>
         </div>

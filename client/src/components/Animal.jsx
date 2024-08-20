@@ -9,6 +9,7 @@ export default function Animal() {
   //const selectAnimalType = ["All", ...new Set (animals.map(animal => animal.animalType))]
   //console.log(selectAnimalType)
   // const [animalType, setAnimalType] = useState(selectAnimalType)
+  const[adopted, setAdopted]=useState(false);
   
 
   useEffect(() => {
@@ -26,16 +27,15 @@ export default function Animal() {
   // const handleFilterType = (type) => {
   //   console.log(type)
   // }
-  
 
-  
+    
   return (
     <div className ="container">
       <h2>Friends looking for a home</h2>
       {/* <div className="animal-type">
         {animalType.map((type) => 
         <button key={type}
-        onClick={() => handleFilterType(type)}>{type.animalType}</button>)}
+        onClick={() => handleFilterType(type)}>{type}</button>)}
       </div>  */}
       
       <div className="outlet-grid">
@@ -50,6 +50,7 @@ export default function Animal() {
           <div className='container'>
             <h4><b>{animal.name}</b></h4>  
             <p>With us since {animal.admissionDate.split("T")[0]}</p>
+            <p className="adopted-conditional">{animal.adoptionDate ? "ADOPTED" : null}</p>
           </div>
         </Link>
           )}

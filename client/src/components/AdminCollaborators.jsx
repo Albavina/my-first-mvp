@@ -6,8 +6,9 @@ let emptyForm = {firstName:"", lastName:"", email:"", phoneNumber:"", age: 0, ki
 export default function AdminCollaborators() {
   const [collaborators, setCollaborators] = useState([]);
   const [newCollaborator, setNewCollaborator]=useState(emptyForm);
-  // const [updatedCollaborator, setUpdatedCollaborator]=useState({firstName:"", lastName:"", email:"", phoneNumber:"", age: 0, kindOfCollaboration: ""})
+  // const [updatedCollaborator, setUpdatedCollaborator]=useState(emptyForm)
   const [addForm, setAddForm] = useState(false);
+  // const [updateForm, setUpdateForm] = useState(false);
 
   useEffect(() => {
     getCollaborators();
@@ -73,9 +74,9 @@ const handleShowForm = (boolean) =>{
 //   const handleUpdateSubmit = (e, id) =>{
 //     e.preventDefault()
 //     updateCollaborator(id)
-//     setUpdatedCollaborator({firstName:"", lastName:"", email:"", phoneNumber:"", age: 0, kindOfCollaboration: ""})
+//     setUpdatedCollaborator(emptyForm)
 //   }
-//   const handleShowForm = (boolean, collab) => {
+//   const handleUpdateForm = (boolean, collab) => {
 //     setUpdateForm(boolean)
 //     setUpdatedCollaborator(collab)
 //   }
@@ -120,7 +121,7 @@ const deleteCollaborator = async (id) => {
           <button 
             type="submit" 
             className="update-collab"
-            // onClick={() => handleShowForm (!updateForm, collab)}
+            onClick={() => handleUpdateForm (!updateForm, collaborator)}
             >Update
           </button>
         </td>
@@ -169,7 +170,6 @@ const deleteCollaborator = async (id) => {
                 type="number"
                 id="age"
                 name="age"
-                // value={checkAge(newCollaborator.age)}
                 value={newCollaborator.age}
                 onChange={handleChange} />
               </div>
@@ -215,7 +215,7 @@ const deleteCollaborator = async (id) => {
             id="firstName" 
             name="firstName"
             value={collab.firstName}
-            onChange={e => handleUpdateChange(e)}></input>
+            onChange={e => handleUpdateChange(e)}/>
         </div>
         <div>
         <label>Last Name</label>
@@ -224,7 +224,7 @@ const deleteCollaborator = async (id) => {
             id="lastName" 
             name="lastName"
             value={collab.lastName}
-            onChange={e => handleUpdateChange(e)}></input>
+            onChange={e => handleUpdateChange(e)}/>
         </div>
         <div>
         <label>E-mail</label>
@@ -233,7 +233,7 @@ const deleteCollaborator = async (id) => {
             id="email" 
             name="email"
             value={collab.email}
-            onChange={e => handleUpdateChange(e)}></input>
+            onChange={e => handleUpdateChange(e)}/>
         </div>
         <div>
         <label>Phone Number</label>
@@ -242,7 +242,7 @@ const deleteCollaborator = async (id) => {
             id="phoneNumber" 
             name="phoneNumber"
             value={collab.phoneNumber}
-            onChange={e => handleUpdateChange(e)}></input>
+            onChange={e => handleUpdateChange(e)}/>
         </div>
         <div>
         <label>Age</label>
@@ -251,7 +251,7 @@ const deleteCollaborator = async (id) => {
             id="age" 
             name="age"
             value={collab.age}
-            onChange={e => handleUpdateChange(e)}></input>
+            onChange={e => handleUpdateChange(e)}/>
         </div>
         <div>
         <label>Kind of Collaboration</label>
@@ -260,11 +260,13 @@ const deleteCollaborator = async (id) => {
             id="kindOfCollaboration" 
             name="kindOfCollaboration"
             value={collab.kindOfCollaboration}
-            onChange={e => handleUpdateChange(e)}></input>
+            onChange={e => handleUpdateChange(e)}/>
         </div>
-      </form>}
-      )}
+        <button type="submit" className='submit-button'>Send</button>
+      </form>} */}
+      {/* )}
     </div> */}
   </>
-  )}
+  )
+}
 

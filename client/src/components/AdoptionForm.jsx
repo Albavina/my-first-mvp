@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./AdoptionForm.css"
 
 let emptyForm = {firstName:"", lastName:"", email: "", phoneNumber:0, age: 0, kindOfCollaboration: ""}
@@ -12,12 +12,13 @@ export default function AdoptionForm() {
 
     const {id} = useParams(); //This is to take the id from the URL
 
+    const navigate = useNavigate();
+
     const getAnimalInfo = async () => {
         try{
             const result = await fetch(`api/animals/${id}`);
             console.log(result)
             const info = await result.json();
-            
             setAnimalInfo(info);
         }catch (error){
            console.log(error)
@@ -50,13 +51,11 @@ export default function AdoptionForm() {
       const {name, value} = event.target;
       setNewCollaborator((collaboratorList) => ({...collaboratorList, [name]:value}))
     }
-    //CONTROL THAT THE PERSON WHO WANTS TO ADOPT IS AN ADULT:
-    // const checkAge = (age) => {
-    //   if (age < 18){
-    //     return "Sorry, only adults can proceed with an adoption"
-    //   }
-    // }
 
+    const handleCancelClick = () =>{
+      navigate("/");
+    }
+ 
   return (
     <>
        <div>
@@ -134,6 +133,8 @@ export default function AdoptionForm() {
 
               <div>
                 <button type="submit" className="adopt-button">Send</button>
+ 
+                <button type="submit" className="cancel-button" onClick={handleCancelClick}>Cancel</button>
               </div>
         </form>
         </div>
