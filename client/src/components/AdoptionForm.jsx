@@ -15,14 +15,13 @@ export default function AdoptionForm() {
     const navigate = useNavigate();
 
     const getAnimalInfo = async () => {
-        try{
-            const result = await fetch(`api/animals/${id}`);
-            console.log(result)
-            const info = await result.json();
-            setAnimalInfo(info);
-        }catch (error){
-           console.log(error)
-        };
+      try{
+        const result = await fetch(`api/animals/${id}`);
+        const profile = await result.json();
+        setAnimalInfo(profile);
+    }catch (error){
+        console.log(error)
+      };
     };
 
     useEffect(() => {getAnimalInfo()}, [])

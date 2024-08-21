@@ -6,9 +6,9 @@ let emptyForm = {firstName:"", lastName:"", email:"", phoneNumber:"", age: 0, ki
 export default function AdminCollaborators() {
   const [collaborators, setCollaborators] = useState([]);
   const [newCollaborator, setNewCollaborator]=useState(emptyForm);
-  // const [updatedCollaborator, setUpdatedCollaborator]=useState(emptyForm)
   const [addForm, setAddForm] = useState(false);
-  // const [updateForm, setUpdateForm] = useState(false);
+  const [updatedCollaborator, setUpdatedCollaborator]=useState(emptyForm)
+  const [updateForm, setUpdateForm] = useState(false);
 
   useEffect(() => {
     getCollaborators();
@@ -53,33 +53,34 @@ const handleShowForm = (boolean) =>{
   setAddForm(boolean)
 }
 
-// const updateCollaborator = async (id) => {
-//   try{
-//     const result = await fetch (`/api/collaborators/${id}`, {
-//       method: "PUT",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(updatedCollaborator)
-//     });
-//     const updatedInfo= await result.json();
-//     setUpdatedCollaborator(updatedInfo)
-//   }catch(error){
-//     console.log(error)
-//   }
+const updateCollaborator = async (id) => {
+  try{
+    const result = await fetch (`/api/collaborators/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedCollaborator)
+    });
+    const updatedInfo= await result.json();
+    setUpdatedCollaborator(updatedInfo)
+  }catch(error){
+    console.log(error)
+    }
+  }
 
-//   const handleUpdateChange = (event) =>{
-//     const {name, value} = event.target;
-//     setUpdatedCollaborator((previousCollabInfo) => ({...previousCollabInfo, [name]:value}));
-//   }
+  const handleUpdateChange = (event) =>{
+    const {name, value} = event.target;
+    setUpdatedCollaborator((previousCollabInfo) => ({...previousCollabInfo, [name]:value}));
+  }
 
-//   const handleUpdateSubmit = (e, id) =>{
-//     e.preventDefault()
-//     updateCollaborator(id)
-//     setUpdatedCollaborator(emptyForm)
-//   }
-//   const handleUpdateForm = (boolean, collab) => {
-//     setUpdateForm(boolean)
-//     setUpdatedCollaborator(collab)
-//   }
+  const handleUpdateSubmit = (e, id) =>{
+    e.preventDefault()
+    updateCollaborator(id)
+    setUpdatedCollaborator(emptyForm)
+  }
+  const handleUpdateForm = (boolean, collab) => {
+    setUpdateForm(boolean)
+    setUpdatedCollaborator(collab)
+  }
 
 const deleteCollaborator = async (id) => {
   try {
@@ -204,8 +205,11 @@ const deleteCollaborator = async (id) => {
               </div>
         </form>
         </div>}
-    {/* <div>
+    <div>
       {collaborators.map((collab) => 
+      <div key={collab.id} className='collaborator-list'>
+        <p>{collab.firstName} {collab.lastName}</p>
+
       {updateForm &&
       <form onSubmit={e => handleUpdateSubmit(e, collab.id)}>
         <div>
@@ -263,10 +267,10 @@ const deleteCollaborator = async (id) => {
             onChange={e => handleUpdateChange(e)}/>
         </div>
         <button type="submit" className='submit-button'>Send</button>
-      </form>} */}
-      {/* )}
-    </div> */}
+      </form>}
+      </div>
+      )}
+    </div>
   </>
   )
 }
-
