@@ -37,3 +37,8 @@
         margin: 15px;
 
     }
+
+    .collaborator-update > form {
+        border: 1px solid blue
+    }
+

@@ -9,6 +9,7 @@ export default function AdminCollaborators() {
   const [addForm, setAddForm] = useState(false);
   const [updatedCollaborator, setUpdatedCollaborator]=useState(emptyForm)
   const [updateForm, setUpdateForm] = useState(false);
+  const [formSentMessage, setFormSentMessage] = useState(false);
 
   useEffect(() => {
     getCollaborators();
@@ -34,6 +35,7 @@ const addCollaborator = async () => {
     const addedCollaborator = await response.json();
     setCollaborators (addedCollaborator);
     setNewCollaborator(emptyForm);  
+    setFormSentMessage(true) 
     }catch(err) {
       console.log(err);
     };
@@ -62,6 +64,9 @@ const updateCollaborator = async (id) => {
     });
     const updatedInfo= await result.json();
     setUpdatedCollaborator(updatedInfo)
+    getCollaborators()
+    setFormSentMessage(true)
+    setUpdateForm(false)
   }catch(error){
     console.log(error)
     }
@@ -69,7 +74,7 @@ const updateCollaborator = async (id) => {
 
   const handleUpdateChange = (event) =>{
     const {name, value} = event.target;
-    setUpdatedCollaborator((previousCollabInfo) => ({...previousCollabInfo, [name]:value}));
+    setUpdatedCollaborator((data) => ({...data, [name]:value}));
   }
 
   const handleUpdateSubmit = (e, id) =>{
@@ -200,26 +205,27 @@ const deleteCollaborator = async (id) => {
                 onChange={handleChange}  />
               </div>
 
-              <div>
-                <button type="submit" className="adopt-button">Send</button>
+             
+              <button type="submit" className="adopt-button">Send</button>
+              <div className='form-sent-message'>{formSentMessage ? <h4>FORM CORRECTLY SENT!</h4> : null}
               </div>
+             
         </form>
         </div>}
     <div>
-      {collaborators.map((collab) => 
-      <div key={collab.id} className='collaborator-list'>
-        <p>{collab.firstName} {collab.lastName}</p>
-
+      {/* {collaborators.map((collab) =>  */}
+      {/* <div key={collab.id} className='collaborator-update'> */}
+      <div className='collaborator-update'>
       {updateForm &&
-      <form onSubmit={e => handleUpdateSubmit(e, collab.id)}>
+      <form onSubmit={e => handleUpdateSubmit(e, updatedCollaborator.id)}>
         <div>
         <label>First Name</label>
             <input 
             type="text" 
             id="firstName" 
             name="firstName"
-            value={collab.firstName}
-            onChange={e => handleUpdateChange(e)}/>
+            value={updatedCollaborator.firstName}
+            onChange={handleUpdateChange}/>
         </div>
         <div>
         <label>Last Name</label>
@@ -227,7 +233,7 @@ const deleteCollaborator = async (id) => {
             type="text" 
             id="lastName" 
             name="lastName"
-            value={collab.lastName}
+            value={updatedCollaborator.lastName}
             onChange={e => handleUpdateChange(e)}/>
         </div>
         <div>
@@ -236,7 +242,7 @@ const deleteCollaborator = async (id) => {
             type="email" 
             id="email" 
             name="email"
-            value={collab.email}
+            value={updatedCollaborator.email}
             onChange={e => handleUpdateChange(e)}/>
         </div>
         <div>
@@ -245,7 +251,7 @@ const deleteCollaborator = async (id) => {
             type="number" 
             id="phoneNumber" 
             name="phoneNumber"
-            value={collab.phoneNumber}
+            value={updatedCollaborator.phoneNumber}
             onChange={e => handleUpdateChange(e)}/>
         </div>
         <div>
@@ -254,7 +260,7 @@ const deleteCollaborator = async (id) => {
             type="number" 
             id="age" 
             name="age"
-            value={collab.age}
+            value={updatedCollaborator.age}
             onChange={e => handleUpdateChange(e)}/>
         </div>
         <div>
@@ -263,13 +269,16 @@ const deleteCollaborator = async (id) => {
             type="text" 
             id="kindOfCollaboration" 
             name="kindOfCollaboration"
-            value={collab.kindOfCollaboration}
+            value={updatedCollaborator.kindOfCollaboration}
             onChange={e => handleUpdateChange(e)}/>
         </div>
         <button type="submit" className='submit-button'>Send</button>
+        <div className='form-sent-message'>
+          {formSentMessage ? <h4>FORM CORRECTLY SENT!</h4> : null}
+        </div>
       </form>}
       </div>
-      )}
+      {/* )} */}
     </div>
   </>
   )

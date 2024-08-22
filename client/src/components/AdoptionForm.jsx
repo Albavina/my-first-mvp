@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import "./AdoptionForm.css"
@@ -17,12 +17,14 @@ export default function AdoptionForm() {
     const getAnimalInfo = async () => {
       try{
         const result = await fetch(`api/animals/${id}`);
+        console.log(result)        
         const profile = await result.json();
         setAnimalInfo(profile);
     }catch (error){
         console.log(error)
       };
     };
+ 
 
     useEffect(() => {getAnimalInfo()}, [])
 

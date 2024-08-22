@@ -22,7 +22,7 @@ router.get("/:id", async function (req, res) {
     const animal = result.data;
     //Check if the Id exists:
     if (animal.length === 1){
-      res.send (animal[0])
+      res.json (animal[0])
     }else{
       res.status(404).send({message: "Animal not found"});
     }

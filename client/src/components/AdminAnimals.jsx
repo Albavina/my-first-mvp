@@ -86,10 +86,6 @@ export default function Admin() {
     setShowForm(boolean)
   };
 
-  // const handleUpdateForm = (boolean, animal) => {
-  //   setUpdateForm(boolean);
-  //   setUpdatedAnimal(animal);
-  // };
 
   const handleUpdateForm = (boolean, animal) => {
     setUpdateForm(boolean);
