@@ -11,7 +11,6 @@ export default function AnimalProfile() {
     const getAnimalProfile = async () => {
         try{
             const result = await fetch(`api/animals/${id}`);
-            console.log(result)  
             const profile = await result.json();
             setAnimalProfile(profile);
         }catch (error){

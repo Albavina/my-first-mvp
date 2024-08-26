@@ -16,8 +16,8 @@ export default function AdoptionForm() {
 
     const getAnimalInfo = async () => {
       try{
-        const result = await fetch(`api/animals/${id}`);
-        console.log(result)        
+        const result = await fetch(`/api/animals/${id}`);
+        // console.log(result)        
         const profile = await result.json();
         setAnimalInfo(profile);
     }catch (error){

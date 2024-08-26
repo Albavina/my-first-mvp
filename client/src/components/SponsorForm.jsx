@@ -13,15 +13,16 @@ export default function SponsorForm() {
     const navigate = useNavigate();
 
     const {id} = useParams(); //This is to take the id from the URL
-
+    console.log(id)
     const getAnimalInfo = async () => {
         try{
-            const result = await fetch(`api/animals/${id}`);
+            const result = await fetch(`/api/animals/${id}`);
             const info = await result.json();
             setAnimalInfo(info);
         }catch (error){
             console.log(error)
         };
+       
     };
     useEffect(() => {getAnimalInfo()}, [])
 
