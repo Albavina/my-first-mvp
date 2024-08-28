@@ -8,6 +8,7 @@ Rescue a best friend is a website for animal shelters who wants to make their an
 ### Dependencies 
 
 - Run `npm install` in project directory. This will install server-related dependencies such as `express`.
+- Run `npm install react-icons`. This willinstall search bar icon.
 - `cd client` and run `npm install`. This will install client dependencies (React).
 
 ### Development

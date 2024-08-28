@@ -2,6 +2,33 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 } */
+
+.search-bar-container{
+  padding-top: 20vh;
+  width: 40%;
+  margin: auto;
+  display: flex;
+  flex-direction:column;
+  min-width: 200px;
+}
+
+.input-wrapper {
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  font-size: 1.25rem;
+  width: 100%;
+  margin-left: 5px;
+}
+
+.input-wrapper:focus {
+  outline: none;
+}
+ 
+#search-icon {
+  color: royalblue;
+}
+
 .outlet-grid{
   display: grid;
   grid-template-columns: 1fr;

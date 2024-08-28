@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { FaSearch } from 'react-icons/fa';
 import './Animal.css';
 
 
@@ -30,32 +31,42 @@ export default function Animal() {
 
     
   return (
-    <div className ="container">
-      <h2>Friends looking for a home</h2>
-      {/* <div className="animal-type">
-        {animalType.map((type) => 
-        <button key={type}
-        onClick={() => handleFilterType(type)}>{type}</button>)}
-      </div>  */}
-      
-      <div className="outlet-grid">
-        <Outlet />
+
+    <>
+      <div className="search-bar-container">
+        <div className='input-wrapper'>
+          <FaSearch id="search-icon" />
+          <input placeholder='Type to search...' />
+        </div>
+        <div>SearchResults</div>
       </div>
-      <div className='animal-grid' >
-          {animals.map(animal => 
-        <Link to={`/${animal.id}`}
-        className='animal-card' key={animal.id}>
-            <img className="animal-picture" alt="Animal Picture"
-            src = {animal.picture}/>
-          <div className='container'>
-            <h4><b>{animal.name}</b></h4>  
-            <p>With us since {animal.admissionDate.split("T")[0]}</p>
-            <p className="adopted-conditional">{animal.adoptionDate ? "ADOPTED" : null}</p>
+        <div className ="container">
+          <h2>Friends looking for a home</h2>
+          {/* <div className="animal-type">
+            {animalType.map((type) => 
+            <button key={type}
+            onClick={() => handleFilterType(type)}>{type}</button>)}
+          </div>  */}
+          
+          <div className="outlet-grid">
+            <Outlet />
           </div>
-        </Link>
-          )}
-           
-      </div>
-    </div>
+          <div className='animal-grid' >
+              {animals.map(animal => 
+            <Link to={`/${animal.id}`}
+            className='animal-card' key={animal.id}>
+                <img className="animal-picture" alt="Animal Picture"
+                src = {animal.picture}/>
+              <div className='container'>
+                <h4><b>{animal.name}</b></h4>  
+                <p>With us since {animal.admissionDate.split("T")[0]}</p>
+                <p className="adopted-conditional">{animal.adoptionDate ? "ADOPTED" : null}</p>
+              </div>
+            </Link>
+              )}
+              
+          </div>
+        </div>
+    </>
   )
 };
