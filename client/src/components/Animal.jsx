@@ -11,6 +11,7 @@ export default function Animal() {
   //console.log(selectAnimalType)
   // const [animalType, setAnimalType] = useState(selectAnimalType)
   const[adopted, setAdopted]=useState(false);
+  const [input, setInput] = useState("");
   
 
   useEffect(() => {
@@ -29,17 +30,42 @@ export default function Animal() {
   //   console.log(type)
   // }
 
+const fetchData = ""
+
+    const handleChange = (value) => {
+      setInput(value);
+      fetchData(value);
+    }
     
   return (
 
     <>
       <div className="search-bar-container">
         <div className='input-wrapper'>
+         
+          <form>
+          <label  htmlFor='searchType'>
+            Search By:
+            <select name="searchType"
+            onChange={(e) => handleInput(e)}>
+              <option value="animalType">Animal Type</option>
+              <option value="name">Name</option>
+              <option value="age">Age</option>
+              <option value="size">Size</option>
+              <option value="admissionDate">Admission Date</option>
+            </select>
+          </label>
           <FaSearch id="search-icon" />
-          <input placeholder='Type to search...' />
+          <input placeholder='Type to search...'
+          value={input}
+          onChange={(e) => handleChange(e.target.value)}
+        />
+        <button>SEARCH</button>
+         </form>
         </div>
         <div>SearchResults</div>
       </div>
+     
         <div className ="container">
           <h2>Friends looking for a home</h2>
           {/* <div className="animal-type">

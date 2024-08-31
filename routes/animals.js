@@ -11,6 +11,25 @@ router.get('/', async function(req, res, next) {
     res.status(500).send(err)};
 });
 
+// GET animals from search 
+router.get('/search', async (req, res) => {
+  const { searchType, input} = req.body
+  const query = `SELECT * FROM animals WHERE 
+  ${searchType} LIKE '${input}%';`
+
+  try {
+    let results = await db(query)
+    console.log(results)
+    res.send(results.data)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+});
+
+
+
+
+
 //GET ONE ANIMAL:
 
 router.get("/:id", async function (req, res) {
