@@ -11,8 +11,12 @@ export default function Animal() {
   //console.log(selectAnimalType)
   // const [animalType, setAnimalType] = useState(selectAnimalType)
   const[adopted, setAdopted]=useState(false);
-  const [input, setInput] = useState("");
+  let [searchInput, setSearchInput] = useState({
+    searchType : "animalType",
+    input: ""
+  });
   
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     getAnimals()}, []);
@@ -30,11 +34,26 @@ export default function Animal() {
   //   console.log(type)
   // }
 
-const fetchData = ""
+const fetchData = () => {
+  const { searchType, input } = searchInput
+  fetch(`/api/animals/search?searchType=${searchType}&input=${input}`)
+  .then(res => res.json())
+  .then(response => {
+   
+    setSearchResults(response)
+    console.log(searchResults)
+  })
+}
 
-    const handleChange = (value) => {
-      setInput(value);
-      fetchData(value);
+    const handleChange =  (event) => {
+      const value = event.target.value;
+      const name = event.target.name
+      // const test = searchInput.input
+      setSearchInput((state) => ({
+        ...state,
+        [name] : value
+      }))
+      fetchData();
     }
     
   return (
@@ -45,9 +64,9 @@ const fetchData = ""
          
           <form>
           <label  htmlFor='searchType'>
-            Search By:
+            Search By: 
             <select name="searchType"
-            onChange={(e) => handleInput(e)}>
+            onChange={(e) => handleChange(e)}>
               <option value="animalType">Animal Type</option>
               <option value="name">Name</option>
               <option value="age">Age</option>
@@ -57,13 +76,28 @@ const fetchData = ""
           </label>
           <FaSearch id="search-icon" />
           <input placeholder='Type to search...'
-          value={input}
-          onChange={(e) => handleChange(e.target.value)}
+          name = "input"
+          value={searchInput.input}
+          onChange={(e) => handleChange(e)}
         />
-        <button>SEARCH</button>
+         <div className='results-list'>
+          {searchResults.map((e,id) => {
+            return <Link to={`/${e.id}`}
+            className='search-result'
+            key={id}
+            >
+              {searchInput.searchType === "animalType" && e.animalType}
+              {searchInput.searchType === "name" && e.name}
+              {searchInput.searchType === "age" && e.age}
+              {searchInput.searchType === "size" && e.size}
+              {searchInput.searchType === "admissionDate" && e.admissionDate}
+            </Link>
+          })}
+         </div>
+        {/* <button>SEARCH</button> */}
          </form>
         </div>
-        <div>SearchResults</div>
+       
       </div>
      
         <div className ="container">

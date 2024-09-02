@@ -13,20 +13,22 @@ router.get('/', async function(req, res, next) {
 
 // GET animals from search 
 router.get('/search', async (req, res) => {
-  const { searchType, input} = req.body
-  const query = `SELECT * FROM animals WHERE 
-  ${searchType} LIKE '${input}%';`
+  const { searchType, input} = req.query;
 
+  const query = `SELECT * FROM animals WHERE 
+  ${searchType} LIKE '%${input}%';`
+  
   try {
+    // if (!searchType || !input) {
+    //   res.status(400).send("Invalid search parameters")
+    // }
     let results = await db(query)
-    console.log(results)
+    // console.log(results)
     res.send(results.data)
   } catch (err) {
-    res.status(500).send(err)
+    res.status(500).send(err);
   }
 });
-
-
 
 
 
@@ -35,11 +37,12 @@ router.get('/search', async (req, res) => {
 router.get("/:id", async function (req, res) {
   const {id} = req.params;
   const sql = `SELECT * FROM animals WHERE id = ${id};`;
-
+  
   try{
     const result = await db (sql);
     const animal = result.data;
     //Check if the Id exists:
+    console.log(req.params)
     if (animal.length === 1){
       res.json (animal[0])
     }else{

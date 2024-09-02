@@ -13,6 +13,7 @@ export default function AnimalProfile() {
             const result = await fetch(`api/animals/${id}`);
             const profile = await result.json();
             setAnimalProfile(profile);
+            
         }catch (error){
             console.log(error)
         };
